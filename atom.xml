@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://igrowp.github.io</id>
     <title>grow up together</title>
-    <updated>2019-12-17T10:08:44.811Z</updated>
+    <updated>2019-12-17T10:50:23.934Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://igrowp.github.io"/>
     <link rel="self" href="https://igrowp.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://igrowp.github.io/images/avatar.png</logo>
     <icon>https://igrowp.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, grow up together</rights>
+    <entry>
+        <title type="html"><![CDATA[vim 操作汇总]]></title>
+        <id>https://igrowp.github.io/post/vim-cao-zuo-hui-zong</id>
+        <link href="https://igrowp.github.io/post/vim-cao-zuo-hui-zong">
+        </link>
+        <updated>2019-12-17T10:49:23.000Z</updated>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://igrowp.github.io/post-images/1576579799320.jpg" alt="vim"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[[linux命令] 文件内容查看]]></title>
         <id>https://igrowp.github.io/post/linux-ming-ling-wen-jian-nei-rong-cha-kan</id>
