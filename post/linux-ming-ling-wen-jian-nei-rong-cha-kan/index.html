@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | grow up together</title>
+<title>[linux命令] 文件内容查看 | grow up together</title>
 <meta name="description" content="专注成长，共同进步" />
 <link rel="shortcut icon" href="https://igrowp.github.io/favicon.ico?v=1576577314276">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,37 +73,100 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              [linux命令] 文件内容查看
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2019-12-17
               </span>
               <span>
-                1 min read
+                3 min read
               </span>
+              
+                <a href="https://igrowp.github.io/tag/bKVfbUX4q" class="post-tag">
+                  # linux
+                </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
+                <ul>
+<li>cat:  由第一行开始显示文件内容</li>
+<li>tac:  由最后一行开始显示，（cat的倒写）</li>
+<li>nl: 显示的时候，顺道输出行号</li>
+<li>more: 一页一页的现实文件内容</li>
+<li>less: 与more类似，但是比more更好的是，他可以往前翻页</li>
+<li>head: 只看头几行</li>
+<li>tail: 只看末尾几行</li>
+</ul>
+<blockquote>
+<p>可以使用man [命令] 来查看各个命令的使用文档， 如： man cp</p>
 </blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+<h2 id="cat">cat</h2>
+<p>由第一行开始显示文件内容</p>
+<p>语法：</p>
+<pre><code>cat [-AbEnTv]
+</code></pre>
+<p>选项与参数<br>
+* -A ：相当於 -vET 的整合选项，可列出一些特殊字符而不是空白而已；<br>
+* -b ：列出行号，仅针对非空白行做行号显示，空白行不标行号！<br>
+* -E ：将结尾的断行字节 $ 显示出来；<br>
+* -n ：列印出行号，连同空白行也会有行号，与 -b 的选项不同；<br>
+* -T ：将 [tab] 按键以 ^I 显示出来；<br>
+* -v ：列出一些看不出来的特殊字符</p>
+<h2 id="tac">tac</h2>
+<p>与cat 相反， 文件内容从最后一行开始显示</p>
+<h2 id="nl">nl</h2>
+<p>显示行好<br>
+* -b ：指定行号指定的方式，主要有两种：<br>
+-b a ：表示不论是否为空行，也同样列出行号 (类似 cat -n)；<br>
+-b t ：如果有空行，空的那一行不要列出行号 (默认值)；<br>
+* -n ：列出行号表示的方法，主要有三种：<br>
+-n ln ：行号在荧幕的最左方显示；<br>
+-n rn ：行号在自己栏位的最右方显示，且不加 0 ；<br>
+-n rz ：行号在自己栏位的最右方显示，且加 0 ；<br>
+* -w ：行号栏位的占用的位数。</p>
+<h2 id="more">more</h2>
+<p>一页一页翻动</p>
+<pre><code>* 空白键 (space)：代表向下翻一页；
+* Enter         ：代表向下翻『一行』；
+* / 字串         ：代表在这个显示的内容当中，向下搜寻『字串』这个关键字；
+* :f            ：立刻显示出档名以及目前显示的行数；
+* q             ：代表立刻离开 more ，不再显示该文件内容。
+* b 或 [ctrl]-b ：代表往回翻页，不过这动作只对文件有用，对管线无用。
+</code></pre>
+<h2 id="less">less</h2>
+<p>一页一页翻动</p>
+<h2 id="head">head</h2>
+<pre><code>head [-n number] 文件
+</code></pre>
+<blockquote>
+<p>选项与参数：<br>
+- -n: 后面接数字，代表显示几行</p>
+</blockquote>
+<h2 id="tail">tail</h2>
+<p>取出文件后面几行</p>
+<pre><code>tail [-n number] 文件
+</code></pre>
+<blockquote>
+<p>选项与参数：<br>
+- -n: 后面接数字，代表显示几行的意思<br>
+- -f: 表示持续侦测后面所接的档名，要等到按下[ctrl]-c才会结束侦测</p>
+</blockquote>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
+<li><a href="#cat">cat</a></li>
+<li><a href="#tac">tac</a></li>
+<li><a href="#nl">nl</a></li>
+<li><a href="#more">more</a></li>
+<li><a href="#less">less</a></li>
+<li><a href="#head">head</a></li>
+<li><a href="#tail">tail</a></li>
 </ul>
 </li>
 </ul>
@@ -113,6 +176,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://igrowp.github.io/post/tu-pian">
+              <h3 class="post-title">
+                图片
+              </h3>
+            </a>
+          </div>
         
 
         
