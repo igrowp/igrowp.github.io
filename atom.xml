@@ -2,14 +2,14 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://igrowp.github.io</id>
     <title>grow up together</title>
-    <updated>2019-12-31T09:06:17.673Z</updated>
+    <updated>2019-12-31T16:12:27.830Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://igrowp.github.io"/>
     <link rel="self" href="https://igrowp.github.io/atom.xml"/>
     <subtitle>专注成长，共同进步</subtitle>
     <logo>https://igrowp.github.io/images/avatar.png</logo>
     <icon>https://igrowp.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2019, grow up together</rights>
+    <rights>All rights reserved 2020, grow up together</rights>
     <entry>
         <title type="html"><![CDATA[vim 操作汇总]]></title>
         <id>https://igrowp.github.io/post/vim-cao-zuo-hui-zong</id>
