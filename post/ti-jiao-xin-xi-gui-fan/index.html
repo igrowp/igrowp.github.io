@@ -1,0 +1,306 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>提交信息规范 | grow up together</title>
+<meta name="description" content="专注成长，共同进步" />
+<link rel="shortcut icon" href="https://igrowp.github.io/favicon.ico?v=1581070792309">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://igrowp.github.io/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://igrowp.github.io">
+  <img class="avatar" src="https://igrowp.github.io/images/avatar.png?v=1581070792309" alt="">
+  </a>
+  <h1 class="site-title">
+    grow up together
+  </h1>
+  <p class="site-description">
+    专注成长，共同进步
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              提交信息规范
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-02-07
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="一-使用husky-lint-staged">一、使用husky &amp; lint-staged</h2>
+<ul>
+<li>husky 是控制代码提交的钩子，在代码被提交到Git仓库之前，我们可以在这里做一些预检查或者格式化工作。</li>
+<li>lint-staged是一个前端文件过滤的工具（仅仅是文件过滤器），可以对文件系统进行过滤，使得每次提交不必对所有文件进行校验</li>
+</ul>
+<h3 id="1-安装husky-和-lint-staged">1. 安装husky 和 lint-staged</h3>
+<pre><code>npm install husky lint-staged -D
+</code></pre>
+<h3 id="2-修改-packagejson增加配置">2. 修改 package.json，增加配置：</h3>
+<pre><code>&quot;husky&quot;: {
+    &quot;hooks&quot;: {
+      &quot;pre-commit&quot;: &quot;lint-staged&quot;
+    }
+  },
+  &quot;lint-staged&quot;: {
+    &quot;src/**/*.{ts,vue}&quot;: [
+      &quot;eslint --fix&quot;, &quot;git add&quot;
+    ]
+  }
+</code></pre>
+<p>上面配置，每次它只会在你本地 commit 之前，校验你提交的内容是否符合你本地配置的 eslint规则，如果符合规则，则会提交成功。如果不符合它会自动执行 eslint —fix 尝试帮你自动修复，如果修复成功则会帮你把修复好的代码提交，如果失败，则会提示你错误，让你修好这个错误之后才能允许你提交代码。</p>
+<p><strong>拓展</strong>： 除了在package.json中配置，也可以在.lintstagedrc、lint-staged.config.js 文件中，lint-staged 的常用选项除了liners 之外，还有<br>
+ignore 、concurrent  等，具体参考文档：</p>
+<pre><code>{
+  &quot;lint-staged&quot;: {
+    &quot;linters&quot;: {
+      &quot;*.{js,scss}&quot;: [&quot;some command&quot;, &quot;git add&quot;]
+    },
+    &quot;ignore&quot;: [&quot;**/dist/*.min.js&quot;]
+  }
+}
+</code></pre>
+<h2 id="二-使用-commitlint">二、使用  Commitlint</h2>
+<p>Commitlint 可以对代码提交的信息进行规范和校验，方便 团队协作和快速定位问题</p>
+<h3 id="1-安装">1. 安装</h3>
+<pre><code>npm install --save-dev @commitlint/config-conventional @commitlint/cli
+
+// 生成配置文件commitlint.config.js，当然也可以是 .commitlintrc.js
+echo &quot;module.exports = {extends: ['@commitlint/config-conventional']};&quot; &gt; commitlint.config.js
+
+</code></pre>
+<h3 id="2-配置">2. 配置</h3>
+<p>在husky的配置加入CommitlIint配置，<mark>”commit-msg&quot;: &quot;commitlint -e $HUSKY_GIT_PARAMS”</mark></p>
+<pre><code>  husky: {
+    hooks: {
+		&quot;pre-commit&quot;: &quot;lint-staged&quot;,
+      &quot;commit-msg&quot;: &quot;commitlint -e $HUSKY_GIT_PARAMS&quot;
+    }
+  },
+</code></pre>
+<h3 id="3-定制提交规范">3. 定制提交规范</h3>
+<h4 id="常用的type类别">常用的type类别</h4>
+<ul>
+<li>build: 影响构建系统或外部依赖关系的更改（示例范围：gulp、broccoli、npm）</li>
+<li>ci: 对ci配置文件和脚本的更改（示例范围：Circle、BrowserStack、SauceLabs）</li>
+<li>docs: 仅文档更改</li>
+<li>feat: 新功能（feature）</li>
+<li>fix: 修补bug</li>
+<li>perf: 提高性能的代码更改</li>
+<li>refactor: 重构（既不修复错误也不添加功能的代码更改）</li>
+<li>style: 样式修改，不影响代码含义的更改</li>
+<li>test: 增加测试</li>
+</ul>
+<p>例如：</p>
+<pre><code>git commit -m 'feat: 增加 xxx 功能'
+git commit -m 'fix: 修复 xxx 功能'
+</code></pre>
+<h4 id="subject">Subject</h4>
+<p>Subject是 commit 目的的简短描述，可以做一些配置，如最大长度限制。</p>
+<h4 id="commitlintconfigjs文件配置">commitlint.config.js文件配置</h4>
+<p><a href="https://marionebl.github.io/commitlint/#/reference-rules">rule配置说明</a> : rule由name和配置数组组成，如：’name:[0, ‘always’, 72]’，数组中第一位为level，可选0,1,2，0为disable，1为warning，2为error，第二位为应用与否，可选always|never，第三位该rule的值。具体配置例子如下：</p>
+<pre><code>module.exports = {
+  extends: [
+    '@commitlint/config-conventional',
+  ],
+  rules: {
+    'type-enum': [2, 'always', [
+      'build', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'style', 'revert',
+    ]],
+    'type-case': [0],
+    'type-empty': [0],
+    'scope-empty': [0],
+    'scope-case': [0],
+    'subject-full-stop': [0, 'never'],
+    'subject-case': [0, 'never'],
+    'header-max-length': [0, 'always', 72],
+  },
+}
+</code></pre>
+<p>参考文章：</p>
+<ul>
+<li>https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/git-hook.html#husky</li>
+<li><a href="https://segmentfault.com/a/1190000017790694">前端代码风格自动化系列（二）之Commitlint - 个人文章 - SegmentFault 思否</a></li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E4%BD%BF%E7%94%A8husky-lint-staged">一、使用husky &amp; lint-staged</a>
+<ul>
+<li><a href="#1-%E5%AE%89%E8%A3%85husky-%E5%92%8C-lint-staged">1. 安装husky 和 lint-staged</a></li>
+<li><a href="#2-%E4%BF%AE%E6%94%B9-packagejson%E5%A2%9E%E5%8A%A0%E9%85%8D%E7%BD%AE">2. 修改 package.json，增加配置：</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C-%E4%BD%BF%E7%94%A8-commitlint">二、使用  Commitlint</a>
+<ul>
+<li><a href="#1-%E5%AE%89%E8%A3%85">1. 安装</a></li>
+<li><a href="#2-%E9%85%8D%E7%BD%AE">2. 配置</a></li>
+<li><a href="#3-%E5%AE%9A%E5%88%B6%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83">3. 定制提交规范</a>
+<ul>
+<li><a href="#%E5%B8%B8%E7%94%A8%E7%9A%84type%E7%B1%BB%E5%88%AB">常用的type类别</a></li>
+<li><a href="#subject">Subject</a></li>
+<li><a href="#commitlintconfigjs%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE">commitlint.config.js文件配置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://igrowp.github.io/post/vim-cao-zuo-hui-zong">
+              <h3 class="post-title">
+                vim 操作汇总
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'ca9ae63fa9566529471a',
+    clientSecret: 'ac32697498de333c7b228c986528222f1b943f87',
+    repo: 'https://igrowp.github.io',
+    owner: 'igrowp',
+    admin: ['igrowp'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  京ICP备19040485号-1 | 
+  <a class="rss" href="https://igrowp.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
